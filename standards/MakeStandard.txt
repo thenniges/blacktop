@@ -1,0 +1,32 @@
+
+This document will define our make standard for the quadsolver project
+
+There will be one main makefile within the src directory that will build the final executable. There will also be makefiles within each sub-directory of src to create unit testing executables for each module of the project.
+
+Every makefile should define the compiler and the c-flags at the top. The compiler should be defined as gcc and the c-flags should be defined as -ggdb -Wall -pedantic -std=c11
+
+This is exactly what this should look like:
+
+CC = gcc
+CFLAGS = -ggdb -Wall -pedantic -std=c11
+
+There should be several lines to create the object files. You must explicitly specify the make rules, you cannot let them use the default.
+
+This should look like this:
+
+getIt.o: getIt/getIt.c getIt/getIt.h
+	${CC} ${CFLAGS} -c getIt/getIt.c
+
+Every makefile should only create one executable. This should be done by compiling each object file together.
+
+This should look like this:
+
+quadsolver: quadsolver.o getIt.o putIt.o format.o calculate.o validate.o
+	${CC} ${CFLAGS} getIt.o putIt.o format.o calculate.o validate.o quadsolver.o -o quadsolver
+
+Finally, every makefile should have a clean rule. It should remove the executable, the object files, and the core.
+
+This should look like:
+
+clean:
+	rm -f *.o core quadsolve
