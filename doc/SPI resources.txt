@@ -1,0 +1,14 @@
+The data sheet is a good place for information for our specific board, start with these links then read that section of the data sheet.
+You will also need to look at the data sheet for the EEPROM as it will outline the SPI protocol it uses.
+
+https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all
+
+Good resource from Ti that is a broad overview of how SPI works
+
+https://hackaday.com/2016/07/01/what-could-go-wrong-spi/
+
+Another good resource describing SPI and potential issues that can arise with the communication
+
+http://www.gammon.com.au/spi
+
+Another resource showing how to setup SPI, it is about an arduino, but has nice logic analyzer images of how SPI looks. Also has a decent overview
