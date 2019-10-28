@@ -1,0 +1,11 @@
+Testing plan
+	introduction
+	usability test
+	accessibility test (may be unnecessary for our project) (WCAG 2.0) (508 compliance)
+	unit testing
+	standard compliance
+	total system test
+	security (may be unnecessary for project)
+	safety (for electronic projects)
+
+Describe testing, what framework, how much, expected results
