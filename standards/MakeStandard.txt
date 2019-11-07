@@ -1,5 +1,5 @@
 
-This document will define our make standard for the quadsolver project
+This document will define our make standard for the blacktop project
 
 There will be one main makefile within the src directory that will build the final executable. There will also be makefiles within each sub-directory of src to create unit testing executables for each module of the project.
 
