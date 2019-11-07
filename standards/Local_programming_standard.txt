@@ -1,0 +1,3 @@
+We will follow the Barr C coding standard as our overarching standard.
+We will also validate all input going into a function.
+We will also have a dialogue box that contains the instructions for the program appear at startup.

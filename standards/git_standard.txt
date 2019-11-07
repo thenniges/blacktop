@@ -1,0 +1,4 @@
+All code that is pushed to the repository should have a complete test suite and should be passing all tests.
+You should run the unit tests for all of the modules before pushing as well. 
+
+You should not push to the repository while any tests are failing.

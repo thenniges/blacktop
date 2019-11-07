@@ -1,0 +1,16 @@
+
+We will use Unity for our unit testing framework and ceedling for mocking functions.
+
+Unit tests should be written to sufficiently test each function of the code.
+
+Unit tests should run independently of one another meaning that you could change the order and it would not effect their success because they do not depend on the state of the program from other previous tests.
+
+Unit tests should be self validating and should only output upon failure.
+
+Unit tests should cover every use case scenario, especially edge cases. Unit tests should also provide sufficient coverage so that every line of code is tested.
+
+
+If you are writing code and you break a test, go back and fix that code even if you did not write it. We all share responsibility for the project.
+
+No code should be submitted to the repository if it is not properly tested and passing all the appropriate tests including tests written for other modules by other programmers.
+
