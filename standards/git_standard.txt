@@ -1,4 +1,18 @@
-All code that is pushed to the repository should have a complete test suite and should be passing all tests.
-You should run the unit tests for all of the modules before pushing as well. 
+The repository can be found at https://github.com/thenniges/blacktop.git
 
+All development should be done on the dev branch and then be moved to master when it is reviewed by team members
+You can clone the dev branch with the following command:
+git clone --single-branch --branch dev https://github.com/thenniges/blacktop.git
+If you feel that the code should be reviewed and moved to the master branch talk to the team leader.
+The team leader is the only person who is allowed to merge to the master branch.
+
+All code that is pushed to the repository should have a complete test suite and should be passing all tests.
+You should run the unit tests for all of the modules before pushing as well and ensure all tests pass. 
+You are responsible for fixing any tests that are not passing.
+Commenting out tests is not acceptable, find the problem and ask for help if necessary.
 You should not push to the repository while any tests are failing.
+
+You should not ignore merge conflicts.
+When you get a merge conflict you should pull any changes. This can be done with the following command:
+git pull
+If there is still a merge conflict after pulling, figure out what has changed and make changes to your local files to make it compatible before uploading it.

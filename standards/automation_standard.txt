@@ -1,0 +1,9 @@
+
+All unit tests will be run by a watchtests.sh script in the src directory.
+When this script is running, all changes made in the src directory and its subdirectorys will cause all unit tests to run.
+You should run this script using the following command:
+./watchtests.sh
+You should have this script running any time that you are developing.
+It is recommended that you use visual studio code as you IDE and that you run this script in the terminal at the bottom so you can get instant feedback anytime you save a file.
+When you create a new subdirectory you need to add a command to make the test executable for that subdirectory to the runtests.sh file
+

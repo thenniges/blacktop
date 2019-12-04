@@ -1,23 +1,26 @@
-
 This document will define our make standard for the blacktop project
 
 There will be one main makefile within the src directory that will build the final executable. There will also be makefiles within each sub-directory of src to create unit testing executables for each module of the project.
 
-Every makefile should define the compiler and the c-flags at the top. The compiler should be defined as gcc and the c-flags should be defined as -ggdb -Wall -pedantic -std=c11
+You must explicitly specify the make rules, you cannot let them use the default.
+You cannot do any strange makefile things, all makefiles should be easy to read.
+The only variables that should be used in your makefiles are CC and CFLAGS
+
+Every makefile should define the compiler and the c-flags at the top. The compiler should be defined as gcc and the c-flags should be defined as -Wall -pedantic -std=c11
 
 This is exactly what this should look like:
 
 CC = gcc
-CFLAGS = -ggdb -Wall -pedantic -std=c11
+CFLAGS = -Wall -pedantic -std=c11
 
-There should be several lines to create the object files. You must explicitly specify the make rules, you cannot let them use the default.
+There should be several lines to create the object files. 
 
 This should look like this:
 
 getIt.o: getIt/getIt.c getIt/getIt.h
 	${CC} ${CFLAGS} -c getIt/getIt.c
 
-Every makefile should only create one executable. This should be done by compiling each object file together.
+The first line of the makefile will create the main executable.
 
 This should look like this:
 
@@ -29,4 +32,4 @@ Finally, every makefile should have a clean rule. It should remove the executabl
 This should look like:
 
 clean:
-	rm -f *.o core quadsolve
+	rm -f *.o core quadsolver
