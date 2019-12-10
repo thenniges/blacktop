@@ -11,7 +11,7 @@ The team leader is the only person who is allowed to merge to the master branch.
 All code that is pushed to the repository should have a complete test suite and should be passing all tests.
 You should run the unit tests for all of the modules before pushing as well and ensure all tests pass. 
 You are responsible for fixing any tests that are not passing.
-Commenting out tests is not acceptable, find the problem and ask for help if necessary.
+Commenting out tests is not acceptable, find the problem and fix it. Ask for help if you don't understand what another developer's code is doing or you are stuck.
 You should not push to the repository while any tests are failing.
 
 You should not ignore merge conflicts.

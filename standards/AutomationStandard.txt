@@ -5,5 +5,7 @@ You should run this script using the following command:
 ./watchtests.sh
 You should have this script running any time that you are developing.
 It is recommended that you use visual studio code as you IDE and that you run this script in the terminal at the bottom so you can get instant feedback anytime you save a file.
-When you create a new subdirectory you need to add a command to make the test executable for that subdirectory to the runtests.sh file
+
+When you create a new file you need to add that file and its test executable to the make test rule in the Makefile.
+When you create a new subdirectory you need to add a command to make the test executable for that subdirectory to the runtests.sh file.
 
