@@ -1,0 +1,49 @@
+We will follow the Barr C coding standard as our overarching standard
+
+
+GENERAL
+
+The GPL license should be included in the header of every src and test file that we create
+
+All functions need to validate the input they are receiving
+
+No more than one statement per line
+
+Line length should not exceed 100 characters
+
+Test classes must start with the name of the class they are testing followed by 'Test'
+
+NEVER use a GOTO statement, this is unacceptable
+
+
+VARIABLES
+
+One character variable names should only be used in loops or for temporary variables
+
+Variables should be named in a way that helps the reader understand what they are used for
+
+Local variables should begin with a lowercase letter and be camel cased (e.g. localVar)
+
+Globals should be used sparingly, but when they are used their names should begin with a capital letter (e.g. Global)
+
+Constant variables should be named in all capital letters. (e.g. CONST)
+
+You should avoid the use of numbers in names unless absolutely necessary
+
+
+FUNCTIONS
+
+The names of functions should be written in camel case starting with a lower case letter (e.g. findSum)
+
+The name of functions should describe the reason for the function to be used
+
+
+INDENTATION
+
+There must be a space after giving a comma between two function arguments
+
+You should set you editor to use proper tabs and NOT spaces
+
+Each nested block should be properly indented and spaced
+
+Proper indentation should be at the beginning and at the end of each block in the program
