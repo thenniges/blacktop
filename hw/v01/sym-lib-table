@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name blacktop01)(type Legacy)(uri ${KIPRJMOD}/blacktop01.lib)(options "")(descr ""))
+  (lib (name dk_Display-Modules-LED-Character-and-Numeric)(type Legacy)(uri /home/kahrl/kicad/digikey-kicad-library/digikey-symbols/dk_Display-Modules-LED-Character-and-Numeric.lib)(options "")(descr ""))
+)

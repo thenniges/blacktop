@@ -1,0 +1,21 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP Conn_01x10_Female_Left
+D Generic connector, single row, 01x10, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Conn_01x10_Female_Right
+D Generic connector, single row, 01x10, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP HDSM-283L
+D Character LED Display Module Orange 7-Segment 1 Character Common Cathode 2.1V 20mA 0.425" H x 0.295" W x 0.124" D (10.80mm x 7.50mm x 3.15mm) 12-SMD, No Lead, 11 Pads
+K segment led
+F https://docs.broadcom.com/docs/AV02-0980EN
+$ENDCMP
+#
+#End Doc Library
