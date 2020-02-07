@@ -18,3 +18,4 @@ doc: contains the documentation for this project
 
 spikes: contains spikes that have been done to understand how this project will work
 
+hw: contails kicad files defining the hardware design
