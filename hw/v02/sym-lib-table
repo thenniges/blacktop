@@ -1,3 +1,3 @@
 (sym_lib_table
-  (lib (name blacktop01)(type Legacy)(uri /home/kahrl/Dropbox/wmu/courses/cs4910/blacktop/blacktop01/blacktop01.lib)(options "")(descr ""))
+  (lib (name blacktop01)(type Legacy)(uri /home/kahrl/Dropbox/wmu/courses/cs4910/blacktop/hw/v01/blacktop01.lib)(options "")(descr ""))
 )

@@ -1,4 +1,4 @@
-16933188258367335
+16923708464544335
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -75256,45 +75256,3 @@ varistor SIOV
 0
 2
 2
-blacktop01
-HDSM-283L
-
-
-0
-11
-11
-blacktop01
-LL3301NF065QG
-
-
-0
-4
-4
-blacktop01
-Logo
-
-
-0
-0
-0
-blacktop01
-PTV09A-4020U-B103
-
-
-0
-3
-3
-blacktop01
-PinSocket_1x10_P2.54mm_Vertical_Left
-Through hole straight socket strip, 1x10, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
-Through hole socket strip THT 1x10 2.54mm single row
-0
-10
-10
-blacktop01
-PinSocket_1x10_P2.54mm_Vertical_Right
-Through hole straight socket strip, 1x10, 2.54mm pitch, single row (from Kicad 4.0.7), script generated
-Through hole socket strip THT 1x10 2.54mm single row
-0
-10
-10
