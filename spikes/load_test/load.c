@@ -9,21 +9,28 @@
 
 int main(void)
 {
+	//set p1, p2, and p3 to 0
 	P1OUT = 0;
 	P2OUT = 0;
 	P3OUT = 0;
 
-	P2SEL &= ~(0xC0);
-	P3SEL = 0x00;
-
+	//set all to inputs
 	P1DIR = 0xff;
 	P2DIR = 0xff;
 	P3DIR = 0xff;
 
+	//unlock p2.6 and p2.7 and p3
+	P2SEL &= ~(0xC0);
+	P3SEL = 0x00;
+
+	//turn on all digits of the 7 seg
 	P3OUT |= (BIT0 | BIT1 | BIT4 | BIT7);
-	P3OUT |= (BIT2 | BIT3 | BIT5);
-	// P2OUT |= (BIT1 | BIT3 | BIT5);
-	P1OUT |= BIT6 ; 
+
+	//turn on the rgb to be whit and the red led
+	P3OUT |= (BIT2 | BIT3 | BIT5 | BIT6);
+
+	//turn on the green led
+	P1OUT |= (BIT0); 
 
 	for(;;)
 	{
