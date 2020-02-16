@@ -3,6 +3,7 @@ The goal of this spike was to write a simple test program that can test everythi
 
 Pushing the onboard button toggles the onboard red led
 Pushing the extra button (on the pcb) toggles the onboard green led
+Changing the potentiometer changes the red of the rgb led
 
 CHIP	BOARD	FUNCTION
 2	P1.0	P1.0 = GREEN LED/EEPROM CS

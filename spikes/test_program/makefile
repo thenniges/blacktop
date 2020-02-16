@@ -5,7 +5,7 @@
 
 # Project name
 SOURCE          = load.c
-ADDITIONAL      = 
+ADDITIONAL      = dtc.c
 # Get base name so we can create .elf file
 NAME            = $(basename $(SOURCE))
 # MSP430 MCU to compile for

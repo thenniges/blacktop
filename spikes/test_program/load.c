@@ -6,6 +6,7 @@
 #include <msp430.h>
 #include <libemb/serial/serial.h>
 #include <libemb/conio/conio.h>
+#include "dtc.h"
 
 int main(void)
 {
@@ -54,6 +55,17 @@ int main(void)
 
 	//turn on the green led
 	P1OUT |= (BIT0); 
+
+	//set up dtc to allow potentiometer to control red led
+	//initialize timer for Red LED(3.5)
+	TA0CCR0 = 1024;
+	TA0CCR1  = 1024;
+	TA0CCTL1 = OUTMOD_7;
+	P3DIR |= BIT5;
+	P3SEL |= BIT5;
+	initialize_dtc(INCH_4, &TA0CCR1);
+	TA0CTL   = TASSEL_2|MC_1|ID_0;
+
 
 	for(;;)
 	{
