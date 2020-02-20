@@ -47,10 +47,12 @@ int main(void)
 	P2SEL &= ~(0xC0);
 	P3SEL = 0x00;
 
-	//turn on all digits of the 7 seg
-	P3OUT |= (BIT0 | BIT1 | BIT4 | BIT7);
+	//turn on all digits of the 7 seg for pcb
+	P2OUT |= (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5 | BIT6);
+	//for breadboard
+	// P3OUT |= (BIT0 | BIT1 | BIT4 | BIT7);
 
-	//turn on the rgb to be whit and the red led
+	//turn on the rgb to be white and the red led
 	P3OUT |= (BIT2 | BIT3 | BIT5 | BIT6);
 
 	//turn on the green led
