@@ -194,14 +194,7 @@ Wire Wire Line
 Wire Wire Line
 	2500 3300 1400 3300
 Wire Wire Line
-	10500 2400 10500 2450
-Wire Wire Line
 	10650 2250 10750 2250
-Wire Wire Line
-	10750 2450 10500 2450
-Connection ~ 10500 2450
-Wire Wire Line
-	10500 2450 10500 2700
 $Comp
 L power:VCC #PWR0108
 U 1 1 5E3334B9
@@ -1488,6 +1481,19 @@ F 1 "Fiducial" H 10235 1305 50  0000 L CNN
 F 2 "Fiducial:Fiducial_0.75mm_Mask1.5mm" H 10150 1350 50  0001 C CNN
 F 3 "~" H 10150 1350 50  0001 C CNN
 	1    10150 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10500 2400 10500 2700
+$Comp
+L power:GND #PWR?
+U 1 1 5E4C0CB2
+P 10750 2450
+F 0 "#PWR?" H 10750 2200 50  0001 C CNN
+F 1 "GND" H 10755 2277 50  0000 C CNN
+F 2 "" H 10750 2450 50  0001 C CNN
+F 3 "" H 10750 2450 50  0001 C CNN
+	1    10750 2450
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
