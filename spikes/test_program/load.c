@@ -8,6 +8,9 @@
 #include <libemb/conio/conio.h>
 #include "dtc.h"
 
+const int DIGS[4] = {0b10010010, 0b10010001, 0b10000011, 0b00010011};
+const int NUMS[16] = {0b10111111, 0b10000110, 0b11011011, 0b11001111, 0b11100110, 0b11101101, 0b11111101, 0b10000111, 0b11111111, 0b11100111, 0b11110111, 0b11111100, 0b11011000, 0b11011110, 0b11111001, 0b11110001};
+
 int main(void)
 {
 	WDTCTL  = WDTPW|WDTHOLD;
@@ -23,6 +26,35 @@ int main(void)
 	P1DIR = 0xff;
 	P2DIR = 0xff;
 	P3DIR = 0xff;
+
+	// //unlock p2.6 and p2.7 and p3
+	P2SEL &= ~(0xC0);
+	P3SEL = 0x00;
+
+	//cycle through all digits on the 7 seg 
+	//for pcb
+	for(int i = 0; i < 4; i++)
+	{
+		P3OUT = (DIGS[i]);
+		for(int j = 0; j < 16; j++)
+		{
+			P2OUT = (NUMS[j]);
+			__delay_cycles(600000);
+		} 
+	}
+	//for breadboard
+	// for(int i = 0; i < 4; i++)
+	// {
+	// 	P3OUT = ~(DIGS[i]);
+	// 	for(int j = 0; j < 16; j++)
+	// 	{
+	// 		P2OUT = ~(NUMS[j]);
+	// 		__delay_cycles(600000);
+	// 	} 
+	// }
+	//Clear p2 and p3 (turn off 7seg)
+	P2OUT = 0;
+	P3OUT = 0;
 
 	//initialize onboard button (p1.3)
 	P1DIR  &= ~BIT3;
@@ -43,15 +75,6 @@ int main(void)
 	//enable global interrupts
 	__bis_SR_register(GIE);
 
-	//unlock p2.6 and p2.7 and p3
-	P2SEL &= ~(0xC0);
-	P3SEL = 0x00;
-
-	//turn on all digits of the 7 seg for pcb
-	P2OUT |= (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5 | BIT6);
-	//for breadboard
-	// P3OUT |= (BIT0 | BIT1 | BIT4 | BIT7);
-
 	//turn on the rgb to be white and the red led
 	P3OUT |= (BIT2 | BIT3 | BIT5 | BIT6);
 
@@ -59,7 +82,7 @@ int main(void)
 	P1OUT |= (BIT0); 
 
 	//set up dtc to allow potentiometer to control red led
-	//initialize timer for Red LED(3.5)
+	//initialize timer for Blue LED(3.5)
 	TA0CCR0 = 1024;
 	TA0CCR1  = 1024;
 	TA0CCTL1 = OUTMOD_7;

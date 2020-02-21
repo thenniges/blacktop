@@ -1,6 +1,10 @@
 This project uses the pin layout that is the same as the first rev of the PCB
 The goal of this spike was to write a simple test program that can test everything except the EEPROM
 
+The program starts by cycling through the hex values 0-F on each digit one by one
+When that completes, the onboard red and green leds should be on
+The RGB LED should have Red and Green on plus whatever percentage of Blue the potentiometer represents
+
 Pushing the onboard button toggles the onboard red led
 Pushing the extra button (on the pcb) toggles the onboard green led
 Changing the potentiometer changes the red of the rgb led
