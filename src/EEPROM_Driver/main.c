@@ -16,6 +16,8 @@ int main(void)
 	WDTCTL  = WDTPW|WDTHOLD;
 	BCSCTL1 = CALBC1_1MHZ;
 	DCOCTL  = CALDCO_1MHZ;
+	P3DIR |= BIT6;
+	P3OUT &= (~BIT6);
 
 	init();
 	write(0x0000, 0xff);
@@ -23,7 +25,6 @@ int main(void)
 
 	if(value != 0xff)
 	{
-		P3DIR |= BIT6;
 		P3OUT |= BIT6;
 	}
 

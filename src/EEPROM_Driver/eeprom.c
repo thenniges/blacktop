@@ -12,13 +12,14 @@ bool init(void)
 {
 
 	//TODO: needs the clock to be rising edge enable
+	//USCIA0???
 	
 	P1OUT &= ~(BIT5 | BIT6 | BIT7);//set p1.5,1.6,1.7 to 0
 	P1DIR |= (BIT5 | BIT6 | BIT7); //set p1.5,1.6,1.7 to outputs
 	P1SEL |= BIT5 | BIT6 | BIT7; //configure pins
 	P1SEL2 |= BIT5 | BIT6 | BIT7; //configure pins
 
-	UCA0CTL1 |= UCSWRST; //put usci in reset mode to configure
+	UCB0CTL1 |= UCSWRST; //put usci in reset mode to configure
 	UCB0CTL1 |= UCSSEL_2; //SMCLK
 	UCB0CTL0 |= UCCKPL | UCMST | UCMODE_0 | UCSYNC | UCMSB; //3-pin spi master, slave mode
 	UCB0BR0 |=0x02;	//What does this do? clock divider?
@@ -39,13 +40,37 @@ bool init(void)
 }
 uint8_t read(uint16_t address)
 {
-	
-	//read data from USISR
 	return 0;
 }
 bool write(uint16_t address, uint8_t data)
 {
-	//write data to USISR
-	//write number of bits to be transferred to USICNTx
+	//check if address is out of range
+	if(adress > 0x1fff)
+	{
+		return false;
+	}
+
+	//Set the write enable latch
+	P1OUT &=~ BIT0;
+	UCB0TXBUF = 0x06;
+	P1OUT |= BIT0;
+
+	//create message
+	uint8_t message[4] = {0};
+	message[0] = 0x02; //The opcode for a write sequence
+	message[1] = address >> 8;
+	message[2] = address & 0xff;
+	message[3] = data;
+
+	//send message
+	P1OUT &=~ BIT0;
+	for(int i = 0; i < 4; i++)
+	{
+		UCB0TXBUF = message[i];
+	}
+
+	//reset CS line to high
+	P1OUT |= BIT0;
+
 	return true;
 }
