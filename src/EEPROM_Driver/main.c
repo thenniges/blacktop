@@ -20,8 +20,8 @@ int main(void)
 	P3OUT &= (~BIT6);
 
 	init();
-	write(0x0000, 0xff);
-	uint8_t value = read(0x0000);
+	write(0x1fff, 0xff);
+	uint8_t value = read(0x1fff);
 
 	if(value != 0xff)
 	{

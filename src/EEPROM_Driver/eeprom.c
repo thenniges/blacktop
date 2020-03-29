@@ -24,7 +24,6 @@ bool init(void)
 	UCB0CTL0 |= UCCKPL | UCMST | UCMODE_0 | UCSYNC | UCMSB; //3-pin spi master, slave mode
 	UCB0BR0 |=0x02;	//What does this do? clock divider?
 	UCB0BR1 |=0;	//What does this do? clock divider?
-	// UCB0MCTL = 0;	//no modulation
 
 	//CS Line is default high
 	P1DIR |= BIT0;
@@ -32,28 +31,39 @@ bool init(void)
 
 	UCB0CTL1 &= ~UCSWRST;
 
-	//Send messages to eeprom to initialize it
-
-
-
 	return true;
 }
 uint8_t read(uint16_t address)
 {
-	return 0;
+	//create message
+	uint8_t message[4] = {0};
+	message[0] = 0x03; //read opcode
+	message[1] = address >> 8;
+	message[2] = address & 0xff;
+	message[3] = 0;
+
+	//send message
+	P1OUT &=~ BIT0;
+	for(int i = 0; i < 4; i++)
+	{
+		UCB0TXBUF = message[i];
+	}
+
+	//reset CS line to high
+	P1OUT |= BIT0;
+
+	//Read the data from the slave
+	uint8_t value = UCB0RXBUF;
+
+	return value;
 }
 bool write(uint16_t address, uint8_t data)
 {
 	//check if address is out of range
-	if(adress > 0x1fff)
+	if(address > 0x1fff)
 	{
 		return false;
 	}
-
-	//Set the write enable latch
-	P1OUT &=~ BIT0;
-	UCB0TXBUF = 0x06;
-	P1OUT |= BIT0;
 
 	//create message
 	uint8_t message[4] = {0};
