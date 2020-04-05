@@ -18,15 +18,34 @@ int main(void)
 	DCOCTL  = CALDCO_1MHZ;
 	P3DIR |= BIT6;
 	P3OUT &= (~BIT6);
+	P3DIR |= BIT2;
+	P3OUT &= (~BIT2);
 
+	uint16_t address = 0x0000;
+	uint8_t write_value = 0xad;
+	
 	init();
-	write(0x1fff, 0xff);
-	uint8_t value = read(0x1fff);
-
-	if(value != 0xff)
+	
+	while(address <= 0x1fff)
 	{
-		P3OUT |= BIT6;
+		write(address, write_value);
+		address++;
 	}
+
+	address = 0x0000;
+
+	while(address <= 0x1fff)
+	{
+		uint8_t read_value = read(address);
+		if(read_value != write_value)
+		{
+			P3OUT |= BIT6;
+			break;
+		}
+		address++;
+	}
+
+	P3OUT |= BIT2;
 
 	for(;;)
 	{
