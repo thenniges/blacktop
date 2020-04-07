@@ -16,19 +16,20 @@ int main(void)
 	WDTCTL  = WDTPW|WDTHOLD;
 	BCSCTL1 = CALBC1_1MHZ;
 	DCOCTL  = CALDCO_1MHZ;
-	P3DIR |= BIT6;
-	P3OUT &= (~BIT6);
-	P3DIR |= BIT2;
-	P3OUT &= (~BIT2);
+	
+	P3DIR |= (BIT2 | BIT5 | BIT6);
+	P3OUT &= (~BIT6 & ~BIT2 & ~BIT5);
 
 	uint16_t address = 0x0000;
-	uint8_t write_value = 0xad;
+	uint8_t write_value = 0xcb;
 	
-	init();
+	eepromInit();
 	
+	//write a value to all addresses and check
+
 	while(address <= 0x1fff)
 	{
-		write(address, write_value);
+		eepromWrite(address, write_value);
 		address++;
 	}
 
@@ -36,7 +37,7 @@ int main(void)
 
 	while(address <= 0x1fff)
 	{
-		uint8_t read_value = read(address);
+		uint8_t read_value = eepromRead(address);
 		if(read_value != write_value)
 		{
 			P3OUT |= BIT6;
@@ -46,6 +47,25 @@ int main(void)
 	}
 
 	P3OUT |= BIT2;
+
+	//erase and check
+
+	eepromErase();
+
+	address = 0x0000;
+
+	while(address <= 0x1fff)
+	{
+		uint8_t read_value = eepromRead(address);
+		if(read_value != 0x00)
+		{
+			P3OUT |= BIT6;
+			break;
+		}
+		address++;
+	}
+	
+	P3OUT |= BIT5;
 
 	for(;;)
 	{

@@ -6,12 +6,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-bool init(void);
-uint8_t read(uint16_t);
-bool write(uint16_t, uint8_t);
+bool eepromInit(void);
+bool eepromErase(void);
+uint8_t eepromRead(uint16_t);
+bool eepromWrite(uint16_t, uint8_t);
 
-void writeEnable(void);
-void writeDisable(void);
-uint8_t readStatus(void);
-void writeStatus(uint8_t);
-void sendMessage(uint8_t*, int);
+void eepromWriteEnable(void);
+void eepromWriteDisable(void);
+uint8_t eepromReadStatus(void);
+void eepromWriteStatus(uint8_t);
+void eepromSendMessage(uint8_t*, int);

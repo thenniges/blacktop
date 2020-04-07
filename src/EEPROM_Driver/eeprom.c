@@ -16,7 +16,7 @@
 #define READ	0x03
 #define WRITE	0x02
 
-bool init(void)
+bool eepromInit(void)
 {
 	//initialize MSP SPI
 	P1OUT &= ~(BIT5 | BIT6 | BIT7);//set p1.5,1.6,1.7 to 0
@@ -38,12 +38,27 @@ bool init(void)
 
 	//initialize EEPROM
 	//change write protection
-	writeStatus(0x00);
+	eepromWriteStatus(0x00);
 
 	return true;
 }
-uint8_t read(uint16_t address)
+
+bool eepromErase(void)
 {
+	for(uint16_t address = 0x0000; address <=0x1fff; address++)
+	{
+		eepromWrite(address, 0x00);
+	}
+
+	return true;
+}
+
+uint8_t eepromRead(uint16_t address)
+{
+	if(address > 0x1fff)
+	{
+		return 0x00; //TODO: is this the right value to return? talk to sphinx
+	}
 	//create message
 	uint8_t message[4] = {0};
 	message[0] = READ; //read opcode
@@ -52,14 +67,15 @@ uint8_t read(uint16_t address)
 	message[3] = 0x00; //dummy byte to allow reading
 
 	//send message
-	sendMessage(message, 4);
+	eepromSendMessage(message, 4);
 
 	//Read the data from the slave
 	uint8_t value = UCB0RXBUF;
 
 	return value;
 }
-bool write(uint16_t address, uint8_t data)
+
+bool eepromWrite(uint16_t address, uint8_t data)
 {
 	//check if address is out of range
 	if(address > 0x1fff)
@@ -68,10 +84,7 @@ bool write(uint16_t address, uint8_t data)
 	}
 
 	// set write enable latch
-	writeEnable();
-
-	// // read the status register
-	readStatus();
+	eepromWriteEnable();
 
 	//create message
 	uint8_t message[4] = {0};
@@ -81,52 +94,52 @@ bool write(uint16_t address, uint8_t data)
 	message[3] = data;
 
 	//send message
-	sendMessage(message, 4);
+	eepromSendMessage(message, 4);
 
 	//wait until the status register indicates the write is complete
 	uint8_t status = 0x01;
 	do{
-		status = readStatus();
+		status = eepromReadStatus();
 	}while( (status & 0x01) == 0x01 ); //bit 1 of status register indicates write is in progress
 
 
 	return true;
 }
 
-void writeEnable(void)
+void eepromWriteEnable(void)
 {
 	uint8_t message[2] = {0};
 	message[0] = WREN;
-	sendMessage(message, 1);
+	eepromSendMessage(message, 1);
 }
 
-void writeDisable(void)
+void eepromWriteDisable(void)
 {
 	uint8_t message[2] = {0};
 	message[0] = WRDI;
-	sendMessage(message, 1);
+	eepromSendMessage(message, 1);
 }
 
-uint8_t readStatus(void)
+uint8_t eepromReadStatus(void)
 {
 	uint8_t message[2] = {0};
 	message[0] = RDSR;
 	message[1] = 0x00;
-	sendMessage(message, 2);
+	eepromSendMessage(message, 2);
 	uint8_t status = UCB0RXBUF;
 	return status;
 }
 
-void writeStatus(uint8_t value)
+void eepromWriteStatus(uint8_t value)
 {
 	uint8_t message[2] = {0};
 	message[0] = WRSR; 
 	message[1] = value;
-	sendMessage(message, 2);
+	eepromSendMessage(message, 2);
 	__delay_cycles(8);
 }
 
-void sendMessage(uint8_t* message, int length)
+void eepromSendMessage(uint8_t* message, int length)
 {
 	//set CS line low
 	P1OUT &=~ BIT0;
