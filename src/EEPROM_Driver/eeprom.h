@@ -75,4 +75,4 @@ void eepromSendMessage(uint8_t* message, int length);
 * Wait until write is complete
 * This will continuously sample the status register and wait for a ready status
 */
-void eepromWaitForWriteCompletion(void)
+void eepromWaitForWriteCompletion(void);
