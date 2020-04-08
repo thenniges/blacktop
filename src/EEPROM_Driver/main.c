@@ -11,21 +11,37 @@
 
 #include "eeprom.h"
 
+void testReadAndWrite();
+void testErase();
+void testGroupReadAndPageWrite();
+
 int main(void)
 {
 	WDTCTL  = WDTPW|WDTHOLD;
 	BCSCTL1 = CALBC1_1MHZ;
 	DCOCTL  = CALDCO_1MHZ;
-	
-	P3DIR |= (BIT2 | BIT5 | BIT6);
-	P3OUT &= (~BIT6 & ~BIT2 & ~BIT5);
 
-	uint16_t address = 0x0000;
-	uint8_t write_value = 0xcb;
+	P3DIR |= (BIT2 | BIT3 | BIT5 | BIT6);
+	P3OUT &= (~BIT2 & ~BIT3 & ~BIT5 & ~BIT6);
 	
 	eepromInit();
 	
-	//write a value to all addresses and check
+	testReadAndWrite();
+	testErase();
+	testGroupReadAndPageWrite();
+
+	for(;;)
+	{
+	}
+	return 0;
+}
+
+void testReadAndWrite()
+{
+	uint16_t address = 0x0000;
+	uint8_t write_value = 0xcb;
+	bool success = true;
+	//write a value to all addresses and check, turn rgb green when successful
 
 	while(address <= 0x1fff)
 	{
@@ -41,18 +57,25 @@ int main(void)
 		if(read_value != write_value)
 		{
 			P3OUT |= BIT6;
+			success = false;
 			break;
 		}
 		address++;
 	}
+	if(success == true)
+	{
+		P3OUT |= BIT2;
+	}
+}
 
-	P3OUT |= BIT2;
-
-	//erase and check
+void testErase()
+{
+	bool success = true;
+	//erase and check, turn rgb blue on when successful
 
 	eepromErase();
 
-	address = 0x0000;
+	uint16_t address = 0x0000;
 
 	while(address <= 0x1fff)
 	{
@@ -60,15 +83,46 @@ int main(void)
 		if(read_value != 0x00)
 		{
 			P3OUT |= BIT6;
+			success = false;
 			break;
 		}
 		address++;
 	}
-	
-	P3OUT |= BIT5;
-
-	for(;;)
+	if(success == true)
 	{
+		P3OUT |= BIT5;
 	}
-	return 0;
+
+}
+
+void testGroupReadAndPageWrite()
+{
+	uint16_t address = 0x0000;
+	bool success = true;
+	//Test page write and block read, turn rgb white when successful
+	uint8_t write_values[32] = {0x00};
+	for(int i =0; i < 32; i++)
+	{
+		write_values[i] = i + 1;
+	}
+
+	eepromPageWrite(address, write_values, 32);
+
+	uint8_t read_values[32] = {0x00};
+	eepromBlockRead(address, read_values, 32);
+
+	for(int i = 0; i <32; i++)
+	{
+		if(read_values[i] != write_values[i])
+		{
+			P3OUT |= BIT6;
+			success = false;
+			break;
+		}
+	}
+
+	if(success == true)
+	{
+		P3OUT |= BIT3;
+	}
 }

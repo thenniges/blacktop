@@ -9,7 +9,9 @@
 bool eepromInit(void);
 bool eepromErase(void);
 uint8_t eepromRead(uint16_t);
+bool eepromBlockRead(uint16_t, uint8_t*, int);
 bool eepromWrite(uint16_t, uint8_t);
+bool eepromPageWrite(uint16_t, uint8_t*, int);
 
 void eepromWriteEnable(void);
 void eepromWriteDisable(void);
