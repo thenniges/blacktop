@@ -16,6 +16,10 @@
 #define READ	0x03
 #define WRITE	0x02
 
+/*****************
+* User Functions *
+******************/
+
 bool eepromInit(void)
 {
 	//initialize MSP SPI
@@ -29,7 +33,7 @@ bool eepromInit(void)
 	UCB0CTL0 = UCCKPH | UCMSB | UCMST | UCSYNC; //3-pin 8 bit spi master, most significant byte first, clock polarity high
 	UCB0BR0 |=0x02;	//clock divider
 	UCB0BR1 |=0;	//clock divider
-	UCB0CTL1 &= ~UCSWRST;
+	UCB0CTL1 &= ~UCSWRST; //remove the reset and SPI is ready to use
 
 	//CS Line is default high
 	P1DIR |= BIT0;
@@ -53,11 +57,11 @@ bool eepromErase(void)
 	return true;
 }
 
-uint8_t eepromRead(uint16_t address)
+bool eepromRead(uint16_t address, uint8_t* value)
 {
 	if(address > 0x1fff)
 	{
-		return 0x00; //TODO: is this the right value to return? talk to sphinx
+		return false;
 	}
 	//create message
 	uint8_t message[4] = {0};
@@ -70,9 +74,9 @@ uint8_t eepromRead(uint16_t address)
 	eepromSendMessage(message, 4);
 
 	//Read the data from the slave
-	uint8_t value = UCB0RXBUF;
+	*value = UCB0RXBUF;
 
-	return value;
+	return true;
 }
 
 bool eepromBlockRead(uint16_t address, uint8_t* data, int length)
@@ -91,13 +95,15 @@ bool eepromBlockRead(uint16_t address, uint8_t* data, int length)
 	//send message
 	//set CS line low
 	P1OUT &=~ BIT0;
+	//send message bytes
 	for(int i = 0; i < 3; i++)
 	{
 		UCB0TXBUF = message[i];
 	}
+	//Send read bytes
 	for(int i = 0; i < length; i++)
 	{
-		UCB0TXBUF = 0x00;
+		UCB0TXBUF = 0x00; //dummy byte to allow reading
 		//Read the data from the slave
 		__delay_cycles(8);
 		data[i] = UCB0RXBUF;
@@ -129,11 +135,8 @@ bool eepromWrite(uint16_t address, uint8_t data)
 	//send message
 	eepromSendMessage(message, 4);
 
-	//wait until the status register indicates the write is complete
-	uint8_t status = 0x01;
-	do{
-		status = eepromReadStatus();
-	}while( (status & 0x01) == 0x01 ); //bit 1 of status register indicates write is in progress
+	//wait until write is complete
+	eepromWaitForWriteCompletion();
 
 
 	return true;
@@ -163,15 +166,16 @@ bool eepromPageWrite(uint16_t address, uint8_t* data, int length)
 	//send message
 	eepromSendMessage(message, length + 3);
 
-	//wait until the status register indicates the write is complete
-	uint8_t status = 0x01;
-	do{
-		status = eepromReadStatus();
-	}while( (status & 0x01) == 0x01 ); //bit 1 of status register indicates write is in progress
-
+	//wait until write is complete
+	eepromWaitForWriteCompletion();
 
 	return true;
 }
+
+
+/*******************
+* Helper Functions *
+********************/
 
 void eepromWriteEnable(void)
 {
@@ -215,9 +219,19 @@ void eepromSendMessage(uint8_t* message, int length)
 	{
 		UCB0TXBUF = message[i];
 	}
+
 	//reset CS line to high
 	P1OUT |= BIT0;
 
 	//delay
 	__delay_cycles(8);
+}
+
+void eepromWaitForWriteCompletion(void)
+{
+	//wait until the status register indicates the write is complete
+	uint8_t status = 0x01;
+	do{
+		status = eepromReadStatus();
+	}while( (status & 0x01) == 0x01 ); //bit 1 of status register indicates write is in progress
 }

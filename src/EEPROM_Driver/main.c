@@ -53,7 +53,8 @@ void testReadAndWrite()
 
 	while(address <= 0x1fff)
 	{
-		uint8_t read_value = eepromRead(address);
+		uint8_t read_value = 0xff;
+		eepromRead(address, &read_value);
 		if(read_value != write_value)
 		{
 			P3OUT |= BIT6;
@@ -79,7 +80,8 @@ void testErase()
 
 	while(address <= 0x1fff)
 	{
-		uint8_t read_value = eepromRead(address);
+		uint8_t read_value = 0xff;
+		eepromRead(address, &read_value);
 		if(read_value != 0x00)
 		{
 			P3OUT |= BIT6;
