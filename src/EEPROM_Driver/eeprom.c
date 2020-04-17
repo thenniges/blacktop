@@ -37,6 +37,8 @@ bool eepromInit(void)
 
 	//CS Line is default high
 	P1DIR |= BIT0;
+	// P1OUT &= ~BIT0;
+	// __delay_cycles(8);
 	P1OUT |= BIT0;
 
 
