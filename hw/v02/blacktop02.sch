@@ -636,8 +636,6 @@ Text Label 4900 4700 0    50   ~ 0
 RGB_B
 Text Label 5350 4600 0    50   ~ 0
 P1.6
-NoConn ~ 9600 5600
-NoConn ~ 9600 5500
 NoConn ~ 6500 7000
 NoConn ~ 6350 7000
 NoConn ~ 5200 7000
@@ -697,36 +695,34 @@ Wire Wire Line
 $Comp
 L Device:C C2
 U 1 1 5E76B875
-P 9500 5250
-F 0 "C2" V 9248 5250 50  0000 C CNN
-F 1 "0.1UF" V 9339 5250 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9538 5100 50  0001 C CNN
-F 3 "~" H 9500 5250 50  0001 C CNN
-	1    9500 5250
+P 9350 5250
+F 0 "C2" V 9098 5250 50  0000 C CNN
+F 1 "0.1UF" V 9189 5250 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9388 5100 50  0001 C CNN
+F 3 "~" H 9350 5250 50  0001 C CNN
+	1    9350 5250
 	0    1    1    0   
 $EndComp
 Wire Wire Line
 	10000 5150 10000 5250
-Wire Wire Line
-	9650 5250 10000 5250
 Connection ~ 10000 5250
 Wire Wire Line
 	10000 5250 10000 5300
 $Comp
 L power:GND #PWR01
 U 1 1 5E7837AF
-P 9250 5300
-F 0 "#PWR01" H 9250 5050 50  0001 C CNN
-F 1 "GND" H 9255 5127 50  0000 C CNN
-F 2 "" H 9250 5300 50  0001 C CNN
-F 3 "" H 9250 5300 50  0001 C CNN
-	1    9250 5300
+P 9100 5300
+F 0 "#PWR01" H 9100 5050 50  0001 C CNN
+F 1 "GND" H 9105 5127 50  0000 C CNN
+F 2 "" H 9100 5300 50  0001 C CNN
+F 3 "" H 9100 5300 50  0001 C CNN
+	1    9100 5300
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9350 5250 9250 5250
+	9200 5250 9100 5250
 Wire Wire Line
-	9250 5250 9250 5300
+	9100 5250 9100 5300
 $Bitmap
 Pos 9150 6800
 Scale 0.700000
@@ -1449,9 +1445,9 @@ NoConn ~ 4300 7000
 NoConn ~ 3000 7000
 NoConn ~ 1700 7000
 Text Label 10700 7650 2    50   ~ 0
-03
+04
 $Comp
-L blacktop01:Fiducial FID1
+L blacktop02-rescue:Fiducial-blacktop01 FID1
 U 1 1 5E5190CE
 P 10150 850
 F 0 "FID1" H 10235 896 50  0000 L CNN
@@ -1462,7 +1458,7 @@ F 3 "~" H 10150 850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L blacktop01:Fiducial FID2
+L blacktop02-rescue:Fiducial-blacktop01 FID2
 U 1 1 5E5198D0
 P 10150 1100
 F 0 "FID2" H 10235 1146 50  0000 L CNN
@@ -1473,7 +1469,7 @@ F 3 "~" H 10150 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L blacktop01:Fiducial FID3
+L blacktop02-rescue:Fiducial-blacktop01 FID3
 U 1 1 5E519B76
 P 10150 1350
 F 0 "FID3" H 10235 1396 50  0000 L CNN
@@ -1496,4 +1492,18 @@ F 3 "" H 10750 2450 50  0001 C CNN
 	1    10750 2450
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9500 5250 9550 5250
+Wire Wire Line
+	9600 5600 9550 5600
+Wire Wire Line
+	9550 5600 9550 5500
+Connection ~ 9550 5250
+Wire Wire Line
+	9550 5250 10000 5250
+Wire Wire Line
+	9600 5500 9550 5500
+Connection ~ 9550 5500
+Wire Wire Line
+	9550 5500 9550 5250
 $EndSCHEMATC

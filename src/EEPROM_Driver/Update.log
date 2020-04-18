@@ -1,0 +1,16 @@
+
+
+
+ ------------------------!this->Initialize(&port[0], &version) #1--------------------------- 
+
+Interface Communication error
+
+---------------------Firmware upate end--------------------------
+
+
+
+ ------------------------!this->Initialize(&port[0], &version) #2--------------------------- 
+
+No error
+
+---------------------Firmware upate end--------------------------
