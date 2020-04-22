@@ -4,6 +4,5 @@
 # rerun all unit tests if there are any changes
 
 
-# when-changed -r "src/EEPROM_Driver/eeprom.c", "src/EEPROM_Driver/eeprom.h",  "src/EEPROM_Driver/unitTests/eepromTests.cpp" -c bash runtests.sh
+when-changed -r "src/EEPROM_Driver/eeprom.c", "src/EEPROM_Driver/eeprom.h",  "src/EEPROM_Driver/unitTests/eepromTests.cpp" -c bash runtests.sh
 
-when-changed -r -1 "src" -c bash runtests.sh

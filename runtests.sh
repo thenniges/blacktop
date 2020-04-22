@@ -10,6 +10,3 @@ make
 
 #and then run the tests
 ./eepromTests
-
-# newlines for good measure
-echo -e "\n\n"

@@ -11,7 +11,10 @@ project(eepromTests)
 enable_language(C)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-pthread")
+set(CMAKE_CXX_FLAGS "-pthread -ftest-coverage -fprofile-arcs")
+set(CMAKE_C_FLAGS "-ftest-coverage -fprofile-arcs")
+
+set(CMAKE_EXE_LINKER_FLAGS "-lgcov")
 
 add_subdirectory(googletest)
 
