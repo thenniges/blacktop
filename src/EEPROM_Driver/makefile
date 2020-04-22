@@ -5,7 +5,7 @@
 
 # Project name
 SOURCE          = main.c
-ADDITIONAL      = eeprom.c
+ADDITIONAL      = eeprom.c hardwareDriver.c
 # Get base name so we can create .elf file
 NAME            = $(basename $(SOURCE))
 # MSP430 MCU to compile for

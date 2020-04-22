@@ -42,37 +42,3 @@ bool eepromWrite(uint16_t address, uint8_t data);
 * Valid addresses are 0x0000 through 0x1fff
 */
 bool eepromPageWrite(uint16_t address, uint8_t* data, int length);
-
-/*******************
-* Helper Functions *
-********************/
-
-/*
-* Write enable the EEPROM, so it is ready to receive a write
-*/
-void eepromWriteEnable(void);
-/*
-* Write disable the EEPROM, so it is unable to be written to without another write enable
-*/
-void eepromWriteDisable(void);
-/*
-* Read the status register of the EEPROM
-* The status register is a 1 byte register with information about the EEPROM
-*/
-uint8_t eepromReadStatus(void);
-/*
-* Write to the status register of the EEPROM
-* There are 3 bits that are writable, they are described in the data sheet
-* This is only useful when changing write protection of the EEPROM
-*/
-void eepromWriteStatus(uint8_t value);
-/*
-* Send a SPI message to the EEPROM
-* This is used by other messages to send a SPI message of size length
-*/
-void eepromSendMessage(uint8_t* message, int length);
-/*
-* Wait until write is complete
-* This will continuously sample the status register and wait for a ready status
-*/
-void eepromWaitForWriteCompletion(void);
