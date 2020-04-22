@@ -1,12 +1,3 @@
-[submodule "Unity"]
-	path = Unity
-	url = https://github.com/ThrowTheSwitch/Unity.git
-[submodule "CMock"]
-	path = CMock
-	url = https://github.com/ThrowTheSwitch/CMock.git
-[submodule "lib/Unity"]
-	path = lib/Unity
-	url = https://github.com/ThrowTheSwitch/Unity.git
-[submodule "lib/CMock"]
-	path = lib/CMock
-	url = https://github.com/ThrowTheSwitch/CMock.git
+[submodule "src/EEPROM_Driver/unitTests/googletest"]
+	path = src/EEPROM_Driver/unitTests/googletest
+	url = https://github.com/google/googletest.git
