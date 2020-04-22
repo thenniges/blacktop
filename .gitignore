@@ -1,3 +1,10 @@
 *.elf
 *.hex
-*/unitTests/build
+*/unitTests/googletest
+*/unitTests/bin
+*/unitTests/lib
+*/unitTests/Makefile
+*/unitTests/CMakeFiles
+*/cmake_install.cmake
+*/CMakeCache.txt
+
