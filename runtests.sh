@@ -3,17 +3,13 @@
 # spacing from last test run
 echo -e "\n\n"
 
-# cd src/validate
-# make
-# cd ../..
+#build unit tests
+cd src/EEPROM_Driver/unitTests
+cmake .
+make
 
-# and then run the tests
-# the line immediately below will run the test and save the output in
-# xUnit format to an xml file
-#${testexecutable1} --gtest_output="xml:${testresults}"
-
-# echo -e "\nValidate\n"
-# ./src/validate/validateTests
+#and then run the tests
+./eepromTests
 
 # newlines for good measure
 echo -e "\n\n"
