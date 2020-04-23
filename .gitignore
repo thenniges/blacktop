@@ -1,0 +1,10 @@
+*.elf
+*.hex
+src/EEPROM_Driver/unitTests/googletest
+src/EEPROM_Driver/unitTests/bin
+src/EEPROM_Driver/unitTests/lib
+src/EEPROM_Driver/unitTests/Makefile
+src/EEPROM_Driver/unitTests/CMakeFiles
+src/EEPROM_Driver/unitTests/cmake_install.cmake
+src/EEPROM_Driver/unitTests/CMakeCache.txt
+src/EEPROM_Driver/unitTests/eepromTests

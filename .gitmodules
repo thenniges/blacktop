@@ -1,0 +1,3 @@
+[submodule "src/EEPROM_Driver/unitTests/googletest"]
+	path = src/EEPROM_Driver/unitTests/googletest
+	url = https://github.com/google/googletest.git

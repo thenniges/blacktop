@@ -1,0 +1,10 @@
+There must be a physical test fixture, capable of holding the hardware being tested, and using sensors to report on any feedback that the MSP430 cannot report to the host computer itself (such as photocells corresponding to LEDs).
+
+There must be a three-piece suite of software to perform automated testing of the hardware:
+Code that runs on the host computer and commands the MSP430 via USB serial communication.
+Code that is flashed to the MSP430 and responds to commands from the host computer allowing operation of every element of the hardware and reporting back on the results of any tests without visible feedback (such as EEPROM testing).
+Code that runs on the test fixture that reports feedback from LEDs to the host computer.
+
+The host computer code must concisely log results during hardware acceptance testing.
+
+Every hardware element must be tested both in isolation, and working in concert with others. For instance, every segment of the 7-segment displays should be tested alone, each 7-segment unit should be run through the hexadecimal digits, and all four units should run through the hexadecimal digits together. Likewise, the EEPROM should be tested both as the only peripheral being accessed by the processor, and along with other devices (within the limitations of the MSP430 interrupt architecture).
