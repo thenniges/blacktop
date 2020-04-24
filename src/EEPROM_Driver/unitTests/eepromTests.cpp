@@ -49,6 +49,7 @@ class EepromTests : public testing::Test{
 
 TEST_F(EepromTests, init_test)
 {
+    //Confirm that init is callint the proper functions
     eepromInit();
     ASSERT_EQ(spiInit_fake.call_count, 1);
     ASSERT_EQ(csInit_fake.call_count, 1);
@@ -58,6 +59,7 @@ TEST_F(EepromTests, init_test)
 
 TEST_F(EepromTests, erase_test)
 {
+    //confirm that erase is calling the proper functions
     eepromErase();
     ASSERT_EQ(eepromWriteEnable_fake.call_count, 0x2000);
     ASSERT_EQ(eepromSendMessage_fake.call_count, 0x2000);
@@ -66,6 +68,7 @@ TEST_F(EepromTests, erase_test)
 
 TEST_F(EepromTests, invalid_read_test)
 {
+    //Confirm that read is failing when given an improper address
     uint8_t value = 0;
     bool retStatus = eepromRead(0x2000, &value);
     ASSERT_EQ(retStatus, false);
@@ -74,11 +77,14 @@ TEST_F(EepromTests, invalid_read_test)
 
 TEST_F(EepromTests, simple_read_valid)
 {
+    //confirm that a simple read is succesful
+    //setup and call function
     readSPIBuffer_fake.return_val = 0x0f;
     uint8_t expected_message[4] = {READ, 0x1f, 0xff, 0x00};
     uint8_t value = 0;
     bool retStatus = eepromRead(0x1fff, &value);
 
+    //Verify results
     ASSERT_EQ(retStatus, true);
     ASSERT_EQ(value, 0x0f);
     ASSERT_EQ(eepromSendMessage_fake.call_count, 1);
@@ -91,6 +97,7 @@ TEST_F(EepromTests, simple_read_valid)
 
 TEST_F(EepromTests, invalid_blockRead_test)
 {
+    //Confirm that an improper address is rejected
     uint8_t value[2] = {0x00, 0x10};
     bool retStatus = eepromBlockRead(0x2000, value, 2);
     ASSERT_EQ(retStatus, false);
@@ -100,9 +107,12 @@ TEST_F(EepromTests, invalid_blockRead_test)
 
 TEST_F(EepromTests, blockRead_test)
 {
+    //Confirm that a block read is properly working
+    //Set up function
     uint8_t value[0x1fff] = {0x22};
     bool retStatus = eepromBlockRead(0x0000, value, 0x1fff);
     
+    //Verify results
     ASSERT_EQ(retStatus, true);
     ASSERT_EQ(repeatedEEPROMRead_fake.call_count, 1);
     uint8_t expected_message[3] = {READ, 0x00, 0x00};
@@ -121,14 +131,17 @@ TEST_F(EepromTests, blockRead_test)
 
 TEST_F(EepromTests, invalid_write_test)
 {
+    //Confirm that write fails with invalid address
     bool status = eepromWrite(0x2000, 0x00);
     ASSERT_EQ(status, false);
 }
 
 TEST_F(EepromTests, write_test)
 {
+    //Confirm that write succeeds
     bool status = eepromWrite(0x00f0, 0x90);
 
+    //Check results
     ASSERT_EQ(eepromWriteEnable_fake.call_count, 1);
     ASSERT_EQ(eepromSendMessage_fake.call_count, 1);
     ASSERT_EQ(eepromWaitForWriteCompletion_fake.call_count, 1);
@@ -142,6 +155,7 @@ TEST_F(EepromTests, write_test)
 
 TEST_F(EepromTests, invald_addr_pageWrite_test)
 {
+    //Confirm that page write fails with invalid address
     uint8_t data = 0;
     bool status = eepromPageWrite(0x2000, &data, 1);
     ASSERT_EQ(status, false);
@@ -149,6 +163,7 @@ TEST_F(EepromTests, invald_addr_pageWrite_test)
 
 TEST_F(EepromTests, invalid_length_pageWrite_test)
 {
+    //Confirm that page write fails with invalid length
     uint8_t data = 0;
     bool status = eepromPageWrite(0x0000, &data, 33);
     ASSERT_EQ(status, false);
@@ -156,14 +171,16 @@ TEST_F(EepromTests, invalid_length_pageWrite_test)
 
 TEST_F(EepromTests, pageWrite_test)
 {
+    //confirm that page write succeeds
+    //set up and call function
     uint8_t data[32] = {0};
     for(uint8_t i = 0; i < 0x20; i++)
     {
         data[i] = i;
     }
-    
     eepromPageWrite(0x1000, data, 32);
 
+    //Confirm results
     ASSERT_EQ(eepromWriteEnable_fake.call_count, 1);
     ASSERT_EQ(eepromSendMessage_fake.arg1_val, 35);
     ASSERT_EQ(eepromWaitForWriteCompletion_fake.call_count, 1);

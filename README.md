@@ -10,7 +10,7 @@ git submodule update
 
 # Test scripts
 
-There is a test script in the blacktop directory that will run every time that you save any of the source code. It will run all the unit tests for all subdirectories.
+There is a test script in the blacktop directory that will run unit tests every time that you save any of the source code. It will run all the unit tests for all subdirectories.
 
 In order to use it you need to install a python tool called when-changed. The command is:
 
@@ -30,13 +30,7 @@ license: contains the relevant license files for this project
 
 standards: contains the coding standards that should be followed for this project
 
-src: contains the source code for this project
-
-test: contains the system tests for this project
-
-build: 
-
-lib: contains local copies of libraries that this project uses
+src: contains the source code and appropriate tests for this project
 
 doc: contains the documentation for this project
 
