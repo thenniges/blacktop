@@ -36,5 +36,5 @@ clean:
 
 # Remote debug board
 debug: $(NAME).elf
-	( mspdebug rf2500 "gdb" 1>/dev/null & ); msp430-gdb $(NAME).elf -ex "target remote :2000"
+	( mspdebug tilib "gdb" 1>/dev/null & ); msp430-gdb $(NAME).elf -ex "target remote :2000"
 
