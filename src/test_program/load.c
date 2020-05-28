@@ -39,7 +39,7 @@ int main(void)
 		for(int j = 0; j < 16; j++)
 		{
 			P2OUT = (NUMS[j]);
-			__delay_cycles(600000);
+			__delay_cycles(200000);
 		} 
 	}
 	//for breadboard

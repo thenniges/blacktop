@@ -611,22 +611,7 @@ Wire Wire Line
 	9900 4000 9900 4700
 Wire Wire Line
 	10000 4200 10000 4800
-$Comp
-L Switch:SW_Push SW1
-U 1 1 5E68F934
-P 7000 4300
-F 0 "SW1" H 7000 4500 50  0000 C CNN
-F 1 "EVQ-Q2Y03W" H 7000 4250 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_EVQQ2" H 7000 4500 50  0001 C CNN
-F 3 "https://industrial.panasonic.com/ac/cdn/e/control/switch/light-touch/catalog/sw_lt_eng_6s_th.pdf" H 7000 4500 50  0001 C CNN
-	1    7000 4300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7200 4300 7500 4300
-Wire Wire Line
-	7500 3850 7400 3850
-Text Label 7300 4300 0    50   ~ 0
+Text Label 7400 3850 0    50   ~ 0
 BTN
 Text Label 2000 4000 0    50   ~ 0
 RGB_R
@@ -675,21 +660,17 @@ $EndComp
 Connection ~ 10000 3000
 Wire Wire Line
 	10000 3000 10100 3000
-Wire Wire Line
-	7500 4300 7500 3850
 $Comp
 L power:GND #PWR0109
 U 1 1 5E74421C
-P 6550 4300
-F 0 "#PWR0109" H 6550 4050 50  0001 C CNN
-F 1 "GND" H 6555 4127 50  0000 C CNN
-F 2 "" H 6550 4300 50  0001 C CNN
-F 3 "" H 6550 4300 50  0001 C CNN
-	1    6550 4300
+P 1475 2225
+F 0 "#PWR0109" H 1475 1975 50  0001 C CNN
+F 1 "GND" H 1480 2052 50  0000 C CNN
+F 2 "" H 1475 2225 50  0001 C CNN
+F 3 "" H 1475 2225 50  0001 C CNN
+	1    1475 2225
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6550 4300 6800 4300
 Wire Wire Line
 	10500 4900 10500 5500
 $Comp
@@ -1482,10 +1463,10 @@ $EndComp
 Wire Wire Line
 	10500 2400 10500 2700
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0110
 U 1 1 5E4C0CB2
 P 10750 2450
-F 0 "#PWR?" H 10750 2200 50  0001 C CNN
+F 0 "#PWR0110" H 10750 2200 50  0001 C CNN
 F 1 "GND" H 10755 2277 50  0000 C CNN
 F 2 "" H 10750 2450 50  0001 C CNN
 F 3 "" H 10750 2450 50  0001 C CNN
@@ -1506,4 +1487,48 @@ Wire Wire Line
 Connection ~ 9550 5500
 Wire Wire Line
 	9550 5500 9550 5250
+Text Label 1175 1600 0    50   ~ 0
+BTN
+$Comp
+L Device:R R1
+U 1 1 5ED2CB50
+P 1475 1350
+F 0 "R1" H 1545 1396 50  0000 L CNN
+F 1 "47k" H 1545 1305 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1405 1350 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/28773/crcwce3.pdf" H 1475 1350 50  0001 C CNN
+	1    1475 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0111
+U 1 1 5ED581EB
+P 1475 1200
+F 0 "#PWR0111" H 1475 1050 50  0001 C CNN
+F 1 "VCC" H 1490 1373 50  0000 C CNN
+F 2 "" H 1475 1200 50  0001 C CNN
+F 3 "" H 1475 1200 50  0001 C CNN
+	1    1475 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5E68F934
+P 1475 1950
+F 0 "SW1" V 1525 1825 50  0000 C CNN
+F 1 "EVQ-Q2Y03W" V 1425 1650 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_EVQQ2" H 1475 2150 50  0001 C CNN
+F 3 "https://industrial.panasonic.com/ac/cdn/e/control/switch/light-touch/catalog/sw_lt_eng_6s_th.pdf" H 1475 2150 50  0001 C CNN
+	1    1475 1950
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1475 2150 1475 2225
+Wire Wire Line
+	1175 1600 1475 1600
+Wire Wire Line
+	1475 1500 1475 1600
+Connection ~ 1475 1600
+Wire Wire Line
+	1475 1600 1475 1750
 $EndSCHEMATC
